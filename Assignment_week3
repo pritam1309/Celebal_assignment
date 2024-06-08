@@ -1,0 +1,216 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOL+/D52FiS3NooEmOWY6tf",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/pritam1309/Celebal_assignment/blob/main/Assignment_week3\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "1. https://www.hackerrank.com/challenges/select-all-sql/problem"
+      ],
+      "metadata": {
+        "id": "vPeJY0xBdHif"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select * from CITY;"
+      ],
+      "metadata": {
+        "id": "ftEXQ7lBdcUv"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "2. https://www.hackerrank.com/challenges/select-by-id/problem"
+      ],
+      "metadata": {
+        "id": "d4gzn7SJddNP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Select *\n",
+        "from CITY\n",
+        "where ID = 1661;"
+      ],
+      "metadata": {
+        "id": "f1BFPgNIdwIy"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "3. https://www.hackerrank.com/challenges/name-of-employees/problem"
+      ],
+      "metadata": {
+        "id": "lFDc-YH_d1Tx"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Select name from Employee order by name asc;"
+      ],
+      "metadata": {
+        "id": "m5DLbmqreW33"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "4. https://www.hackerrank.com/challenges/japanese-cities-attributes/problem"
+      ],
+      "metadata": {
+        "id": "VYEEbBiUeZfa"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select * from CITY where COUNTRYCODE = 'JPN';"
+      ],
+      "metadata": {
+        "id": "zOtDRBibet1e"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "5. https://www.hackerrank.com/challenges/weather-observation-station-1/problem"
+      ],
+      "metadata": {
+        "id": "6eoyx3h9ewzV"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select CITY, STATE from STATION;"
+      ],
+      "metadata": {
+        "id": "yK-wHagtfIhe"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "6. https://www.hackerrank.com/challenges/weather-observation-station-3/problem"
+      ],
+      "metadata": {
+        "id": "xK5H8FrnfLrI"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select distinct CITY from STATION where ID%2=0;"
+      ],
+      "metadata": {
+        "id": "dwlMsQtOfkgP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "7. https://www.hackerrank.com/challenges/weather-observation-station-4/problem"
+      ],
+      "metadata": {
+        "id": "k2dMDaYvfnnA"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT COUNT(CITY) - COUNT(DISTINCT CITY) FROM STATION;"
+      ],
+      "metadata": {
+        "id": "-tsXGL69fzrs"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "8. https://www.hackerrank.com/challenges/weather-observation-station-5/problem"
+      ],
+      "metadata": {
+        "id": "FQU6PXBZf2Hx"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select city, char_length(city) from station where char_length(city)= (select min(char_length(city)) from station) order by city limit 1; select city, char_length(city) from station where char_length(city)= (select max(char_length(city)) from station) order by city limit 1;"
+      ],
+      "metadata": {
+        "id": "N7__ib_ZgJh_"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "9. https://www.hackerrank.com/challenges/average-population/problem"
+      ],
+      "metadata": {
+        "id": "3j5OvX8EgOBq"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select round(avg(population),0) from city;"
+      ],
+      "metadata": {
+        "id": "jqrJHGQwgcv9"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "10. https://www.hackerrank.com/challenges/average-population-of-each-continent/problem"
+      ],
+      "metadata": {
+        "id": "qGldPkaZge4F"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT COUNTRY.Continent, FLOOR(AVG(CITY.Population)) AS AvgCityPopulation\n",
+        "FROM CITY\n",
+        "JOIN COUNTRY\n",
+        "ON CITY.CountryCode = COUNTRY.Code\n",
+        "GROUP BY COUNTRY.Continent;"
+      ],
+      "metadata": {
+        "id": "MYBVDyzVgk90"
+      }
+    }
+  ]
+}
