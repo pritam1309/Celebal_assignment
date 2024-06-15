@@ -1,0 +1,229 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOhpi3+C9xtEDERbghf/FqN",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/pritam1309/Celebal_assignment/blob/main/Assignment_week4\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**ALL QUESTION IS ANSWERED IN MYSQL SERVER**"
+      ],
+      "metadata": {
+        "id": "7AA5QBgzX4UP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/weather-observation-station-8/problem"
+      ],
+      "metadata": {
+        "id": "yJCsJ4hBUWgG"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select distinct city\n",
+        "from station\n",
+        "where substr(lower(city),1,1) in ('a','e','i','o','u') and\n",
+        "substr(lower(city), -1) in ('a','e','i','o','u');"
+      ],
+      "metadata": {
+        "id": "_T21c5e2Uasy"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/population-density-difference/problem"
+      ],
+      "metadata": {
+        "id": "QemaMsjQUiz9"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select (MAX(population) -MIN(population)) from city"
+      ],
+      "metadata": {
+        "id": "v-5Cc9OwUjya"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/weather-observation-station-19/problem"
+      ],
+      "metadata": {
+        "id": "6u7SHugYUsEO"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT ROUND(SQRT(POW(MAX(LONG_W)-MIN(LONG_W),2) + POW(MAX(LAT_N)-MIN(LAT_N),2)),4) FROM STATION"
+      ],
+      "metadata": {
+        "id": "pd3arMy5Uv2y"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/weather-observation-station-20/problem"
+      ],
+      "metadata": {
+        "id": "IRewL4G4U0pY"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT\n",
+        "        ROUND(AVG(LAT_N),4) AS median\n",
+        "FROM (\n",
+        "        SELECT\n",
+        "                LAT_N,\n",
+        "                ROW_NUMBER() OVER(ORDER BY LAT_N) AS row_num,\n",
+        "                COUNT(LAT_N) OVER() AS total_rows\n",
+        "        FROM STATION) AS numbered\n",
+        "WHERE\n",
+        "        row_num IN (FLOOR((total_rows+1)/2.0), CEIL((total_rows+1)/2.0));"
+      ],
+      "metadata": {
+        "id": "e7h2K9d2U5LD"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/african-cities/problem"
+      ],
+      "metadata": {
+        "id": "30c7n4WqVNQW"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "select c.name from city c inner join country y on c.countrycode= y.code where continent='Africa'"
+      ],
+      "metadata": {
+        "id": "xFop2BEFVR9K"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/the-report/problem"
+      ],
+      "metadata": {
+        "id": "duhsE8SMVai0"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT CASE WHEN t2.GRADE < 8 THEN NULL ELSE t1.NAME END AS NAME, t2.GRADE, t1.MARKS FROM Students t1 JOIN Grades t2 on t1.MARKS >= t2.Min_Mark and t1.MARKS <= t2.Max_Mark ORDER BY t2.GRADE DESC, t1.Name;"
+      ],
+      "metadata": {
+        "id": "MqWAaON0Vott"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/full-score/problem"
+      ],
+      "metadata": {
+        "id": "AEd-1No_VySp"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT c.hacker_id, d.name\n",
+        "FROM Difficulty a JOIN Challenges b ON a.difficulty_level = b. difficulty_level\n",
+        "\t\t\t\t\t\t\t\t\t\t\t\t\t\tJOIN Submissions  c ON c.challenge_id = b.challenge_id\n",
+        "\t\t\t\t\t\t\t\t\t\t\t\t\t\tJOIN Hackers  d ON d.hacker_id  = c.hacker_id\n",
+        "WHERE c.score = a.score\n",
+        "GROUP BY c.hacker_id, d.name\n",
+        "HAVING COUNT(c.challenge_id) > 1\n",
+        "ORDER BY COUNT(c.challenge_id) DESC, c.hacker_id ASC;"
+      ],
+      "metadata": {
+        "id": "2owe6Pt0V1-Y"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "https://www.hackerrank.com/challenges/harry-potter-and-wands/problem"
+      ],
+      "metadata": {
+        "id": "l3BTTKxkWlrZ"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT id, t2.age, coins_needed, t1.power FROM wands AS t1,\n",
+        "(\n",
+        "    SELECT age, w.code, power, MIN(coins_needed) as min_coins FROM wands as w\n",
+        "    INNER JOIN wands_property as wp\n",
+        "    ON w.code = wp.code AND is_evil = 0\n",
+        "    GROUP BY power, age, w.code\n",
+        ") AS t2\n",
+        "WHERE t1.code = t2.code AND t1.power = t2.power AND t1.coins_needed = t2.min_coins\n",
+        "ORDER BY power DESC, age DESC"
+      ],
+      "metadata": {
+        "id": "IM-0vvOqXQFn"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "SELECT hackers.hacker_id, hackers.name, total_score_by_hacker.total_score\n",
+        "FROM\n",
+        "    (SELECT hacker_id, sum(max_score) as total_score\n",
+        "     FROM\n",
+        "        (SELECT hacker_id, challenge_id, MAX(score) AS max_score\n",
+        "        FROM Submissions\n",
+        "        GROUP BY hacker_id, challenge_id) as max_scores\n",
+        "    GROUP BY hacker_id) as total_score_by_hacker\n",
+        "JOIN hackers ON total_score_by_hacker.hacker_id = hackers.hacker_id\n",
+        "WHERE total_score_by_hacker.total_score > 0\n",
+        "ORDER BY total_score_by_hacker.total_score DESC, hackers.hacker_id ASC;"
+      ],
+      "metadata": {
+        "id": "9sDcSdepXSEl"
+      }
+    }
+  ]
+}
